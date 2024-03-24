@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 let
   user = "kmj";
@@ -45,7 +45,7 @@ in
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-
+  hardware.opengl.enable = true;
   users = {
     users = {
       ${user} = {
@@ -53,23 +53,33 @@ in
         extraGroups = ["wheel"];
 	hashedPassword = "$6$w9ELjs/WT9MLb0cu$y5NV2Ch1hYscVjIV4Zx/bihdU3aJF2uqTHHGvIvYVQBOFyxGF6cvTlHE6mBhTH5hH5MPhSHXI855tE.0JMV0k1";
 	home = "/home/${user}";
-	packages = with pkgs; [
- 	  tree
-	];
       };
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    vim 
-    wget
-    curl
-    git
-  ];
-
+  environment = {
+    systemPackages = with pkgs; [
+      neovim
+      wget
+      curl
+      git
+      parted
+      nix-output-monitor
+      open-vm-tools
+      mesa-demos
+      mesa
+      busybox
+    ];
+    sessionVariables = {
+      XDG_SESSION_TYPE = "wayland";
+      WLR_NO_HARDWARE_CURSORS = "1";
+      WLR_RENDERER_ALLOW_SOFTWARE = "1";
+    };
+  };
+  virtualisation.vmware.guest.enable = true;
   nix = {
     settings = {
-      substituters = lib.mkForce ["https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];
+      substituters = lib.mkForce ["https://mirror.sjtu.edu.cn/nix-channels/store"];
       auto-optimise-store = true;
       experimental-features = ["nix-command" "flakes"];
     };
@@ -79,6 +89,6 @@ in
       options = "--delete-older-than 3d";
     };
   };
-  system.stateVersion = "23.11"; 
+  system.stateVersion = "24.05"; 
 }
 

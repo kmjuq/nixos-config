@@ -1,21 +1,63 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   # 注意修改这里的用户名与用户目录
   home.username = "kmj";
   home.homeDirectory = "/home/kmj";
 
-  # git 相关配置
-  programs.git = {
+  programs = {
+    home-manager = {
+      enable = true;
+    };
+    git = {
+      enable = true;
+      userName = "kemengjian";
+      userEmail = "kemengjian@126.com";
+    };
+    bash = {
+      enable = true;
+      enableCompletion = true;
+      bashrcExtra = ''
+        export KITTY_ENABLE_WAYLAND=1;
+        export XDG_CURRENT_DESKTOP=Hyprland;
+        export XDG_SESSION_DESKTOP=Hyprland;
+        export XDG_SESSION_TYPE=wayland;
+        export XDG_SESSION_TYPE=wayland;
+        export WLR_NO_HARDWARE_CURSORS=1;
+        export WLR_RENDERER_ALLOW_SOFTWARE=1;
+      '';
+    };
+  };
+
+  wayland.windowManager.hyprland = {
     enable = true;
-    userName = "kemengjian";
-    userEmail = "kemengjian@126.com";
+    settings = {
+	"$mod" = "SUPER";
+    };
+    extraConfig = builtins.readFile ./hyprland.conf;
   };
 
   home.packages = with pkgs;[
     # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
+    kitty
+    firefox
+    gnumake
+    gcc
+    rustc
+    cargo
+    go
+    wayland
+    xwayland    
+    greetd.wlgreet
     neofetch
     nnn # terminal file manager
+
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
+    wayland-protocols
+    wayland-utils
+    wlroots
+    gtk3
 
     # archives
     zip
@@ -39,7 +81,6 @@
     # nix related
     # it provides the command `nom` works just like `nix`
     # with more details log output
-    nix-output-monitor
 
     # productivity
     hugo # static site generator
@@ -58,50 +99,6 @@
     sysstat
   ];
 
-  # 启用 starship，这是一个漂亮的 shell 提示符
-  programs.starship = {
-    enable = true;
-    # 自定义配置
-    settings = {
-      add_newline = false;
-      aws.disabled = true;
-      gcloud.disabled = true;
-      line_break.disabled = true;
-    };
-  };
+  home.stateVersion = "24.05";
 
-  # alacritty - 一个跨平台终端，带 GPU 加速功能
-  programs.alacritty = {
-    enable = true;
-    # 自定义配置
-    settings = {
-      env.TERM = "xterm-256color";
-      font = {
-        size = 12;
-        draw_bold_text_with_bright_colors = true;
-      };
-      scrolling.multiplier = 5;
-      selection.save_to_clipboard = true;
-    };
-  };
-
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-    # TODO 在这里添加你的自定义 bashrc 内容
-    bashrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-    '';
-
-    # TODO 设置一些别名方便使用，你可以根据自己的需要进行增删
-    shellAliases = {
-      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
-    };
-  };
-
-  home.stateVersion = "23.11";
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 }
