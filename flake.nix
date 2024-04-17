@@ -44,7 +44,7 @@
     impermanence.url = "github:nix-community/impermanence";
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.33.1";
+      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -72,7 +72,7 @@
 
   };
 
-  outputs = { self, nixpkgs,home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: {
     nixosConfigurations = {
       "mac-vm-kmj" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
@@ -91,6 +91,18 @@
           }
         ];
       };
+    };
+    homeConfigurations = {
+      "kmj@mac-vm-kmj" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;   
+
+	modules = [
+          hyprland.homeManagerModules.default
+
+	  ./home.nix
+	];
+      };
+     
     };
   };
 }

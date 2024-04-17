@@ -45,7 +45,11 @@ in
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-  hardware.opengl.enable = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
   users = {
     users = {
       ${user} = {
@@ -63,18 +67,15 @@ in
       wget
       curl
       git
+      gh
       parted
       nix-output-monitor
       open-vm-tools
       mesa-demos
       mesa
       busybox
+      toybox
     ];
-    sessionVariables = {
-      XDG_SESSION_TYPE = "wayland";
-      WLR_NO_HARDWARE_CURSORS = "1";
-      WLR_RENDERER_ALLOW_SOFTWARE = "1";
-    };
   };
   virtualisation.vmware.guest.enable = true;
   nix = {
