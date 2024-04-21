@@ -7,6 +7,7 @@ in
   imports =
     [ 
       ./hardware-configuration.nix
+      ./fonts.nix
     ];
 
   boot = {
@@ -49,6 +50,9 @@ in
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      intel-compute-runtime
+    ];
   };
   users = {
     users = {
