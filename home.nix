@@ -23,6 +23,12 @@
         export XDG_SESSION_TYPE=wayland;
       '';
     };
+    foot = {
+      enable = true;
+      server = {
+        enable = true;
+      };
+    };
   };
 
   wayland.windowManager.hyprland = {
@@ -39,9 +45,35 @@
     xwayland
     wlroots
     dbus
-    # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
-    foot
+    wl-clipboard
+    # display manager
+    
+    # file manager
+    yazi
+    # input
+    fcitx5-rime
+    # clipboard manager
+    cliphist
+    # app launcher
+    anyrun
+    # terminal
+    zellij
+    starship
     kitty
+    # notification
+    mako
+    # status bar
+    waybar
+    # widgets
+    eww
+    # wallpaper
+    hyprpaper
+    # other
+    qt6.qtwayland
+    # multimedia
+    pipewire
+    wireplumber
+    # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
     firefox
     gnumake
     gcc
