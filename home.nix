@@ -18,12 +18,9 @@
       enable = true;
       enableCompletion = true;
       bashrcExtra = ''
-        export KITTY_ENABLE_WAYLAND=1;
         export XDG_CURRENT_DESKTOP=Hyprland;
         export XDG_SESSION_DESKTOP=Hyprland;
         export XDG_SESSION_TYPE=wayland;
-        export WLR_NO_HARDWARE_CURSORS=1;
-        export WLR_RENDERER_ALLOW_SOFTWARE=1;
       '';
     };
   };
@@ -41,10 +38,10 @@
     wayland-utils
     xwayland
     wlroots
+    dbus
     # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
     foot
     kitty
-    alacritty 
     firefox
     gnumake
     gcc
