@@ -29,6 +29,19 @@
         enable = true;
       };
     };
+    starship = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+
+      settings = {
+        character = {
+          success_symbol = "[›](bold green)";
+          error_symbol = "[›](bold red)";
+        };
+        palette = "catppuccin_mocha";
+      };
+    };
   };
 
   wayland.windowManager.hyprland = {
@@ -68,11 +81,11 @@
     eww
     # wallpaper
     hyprpaper
-    # other
-    qt6.qtwayland
     # multimedia
     pipewire
     wireplumber
+    # other
+    qt6.qtwayland
     # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
     firefox
     gnumake
