@@ -33,14 +33,7 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-
-      settings = {
-        character = {
-          success_symbol = "[›](bold green)";
-          error_symbol = "[›](bold red)";
-        };
-        palette = "catppuccin_mocha";
-      };
+      settings = builtins.fromTOML (builtins.readFile ./pastel-powerline.toml);
     };
   };
 
@@ -49,6 +42,10 @@
     extraConfig = builtins.readFile ./hyprland.conf;
   };
 
+  home.shellAliases = {
+    reboot = "systemctl reboot";
+    poweroff = "systemctl poweroff";
+  };
   home.packages = with pkgs;[
     xdg-desktop-portal-wlr
     xdg-desktop-portal-hyprland
