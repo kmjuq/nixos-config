@@ -33,7 +33,19 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      settings = builtins.fromTOML (builtins.readFile ./pastel-powerline.toml);
+      settings = {
+	format = "$all";
+	palette = "catppuccin_latte";
+      } // builtins.fromTOML (
+	builtins.readFile (
+	  pkgs.fetchFromGitHub {
+	    owner = "catppuccin";
+	    repo = "starship";
+	    rev = "5629d23";
+	    sha256 = "sha256-nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
+	  } + /palettes/latte.toml
+	)
+      );
     };
   };
 
