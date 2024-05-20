@@ -1,6 +1,10 @@
 { inputs, config, pkgs, ... }:
 
 {
+
+  imports = [
+    ./software/neovim
+  ];
   # 注意修改这里的用户名与用户目录
   home.username = "kmj";
   home.homeDirectory = "/home/kmj";
@@ -35,7 +39,7 @@
       enableZshIntegration = true;
       settings = {
 	format = "$all";
-	palette = "catppuccin_latte";
+	palette = "catppuccin_mocha";
       } // builtins.fromTOML (
 	builtins.readFile (
 	  pkgs.fetchFromGitHub {
@@ -43,7 +47,7 @@
 	    repo = "starship";
 	    rev = "5629d23";
 	    sha256 = "sha256-nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
-	  } + /palettes/latte.toml
+	  } + /palettes/mocha.toml
 	)
       );
     };
