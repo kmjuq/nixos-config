@@ -3,7 +3,7 @@
 {
 
   imports = [
-    ./software/neovim
+    ./software
   ];
   # 注意修改这里的用户名与用户目录
   home.username = "kmj";
@@ -53,11 +53,6 @@
     };
   };
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    extraConfig = builtins.readFile ./hyprland.conf;
-  };
-
   home.shellAliases = {
     reboot = "systemctl reboot";
     poweroff = "systemctl poweroff";
@@ -100,10 +95,9 @@
     # other
     qt6.qtwayland
     # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
-    firefox
+    devenv
     gnumake
     gcc
-    rustc
     cargo
     go
     neofetch
