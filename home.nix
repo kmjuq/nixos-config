@@ -17,6 +17,11 @@
       enable = true;
       userName = "kemengjian";
       userEmail = "kemengjian@126.com";
+      extraConfig = {
+        init = {
+          defaultBranch = "main";
+        };
+      };
     };
     bash = {
       enable = true;
@@ -38,37 +43,32 @@
       enableBashIntegration = true;
       enableZshIntegration = true;
       settings = {
-	format = "$all";
-	palette = "catppuccin_mocha";
+        format = "$all";
+        palette = "catppuccin_mocha";
       } // builtins.fromTOML (
-	builtins.readFile (
-	  pkgs.fetchFromGitHub {
-	    owner = "catppuccin";
-	    repo = "starship";
-	    rev = "5629d23";
-	    sha256 = "sha256-nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
-	  } + /palettes/mocha.toml
-	)
+        builtins.readFile (
+          pkgs.fetchFromGitHub
+            {
+              owner = "catppuccin";
+              repo = "starship";
+              rev = "5629d23";
+              sha256 = "sha256-nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
+            } + /palettes/mocha.toml
+        )
       );
     };
   };
 
-  home.shellAliases = {
-    reboot = "systemctl reboot";
-    poweroff = "systemctl poweroff";
-  };
   home.packages = with pkgs;[
-    xdg-desktop-portal-wlr
-    xdg-desktop-portal-hyprland
+    xdg-desktop-portal
     wayland
     wayland-protocols
     wayland-utils
-    xwayland
     wlroots
     dbus
     wl-clipboard
     # display manager
-    
+
     # file manager
     yazi
     # input
@@ -79,14 +79,9 @@
     anyrun
     # terminal
     zellij
-    starship
     kitty
     # notification
     mako
-    # status bar
-    waybar
-    # widgets
-    eww
     # wallpaper
     hyprpaper
     # multimedia
@@ -98,8 +93,6 @@
     devenv
     gnumake
     gcc
-    cargo
-    go
     neofetch
     nnn # terminal file manager
 
@@ -110,8 +103,6 @@
 
     # utils
     ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    yq-go # yaml processer https://github.com/mikefarah/yq
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
 
@@ -130,7 +121,7 @@
     hugo # static site generator
     glow # markdown previewer in terminal
 
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
 
@@ -141,6 +132,9 @@
 
     # system tools
     sysstat
+    elinks
+    dconf
+    
   ];
 
   home.stateVersion = "24.05";

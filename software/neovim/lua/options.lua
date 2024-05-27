@@ -4,8 +4,8 @@ local opt = vim.opt
 opt.number = true
 
 -- 缩进
-opt.tabstop = 4
-opt.shiftwidth = 4
+opt.tabstop = 2
+opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
 
@@ -14,9 +14,12 @@ opt.wrap = false
 
 opt.cursorline = true
 
-opt.mouse:append("a")
+-- opt.mouse:append("a")
 
 opt.clipboard:append("unnamedplus")
 
 opt.termguicolors = true
-opt.signcolumn = "yes"
+-- opt.signcolumn = "yes"
+
+opt.list = true
+opt.listchars = { space = "·" }

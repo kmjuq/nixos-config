@@ -1,8 +1,8 @@
-parted /dev/sda -- mklabel gpt
-parted /dev/sda -- mkpart ESP fat32 1MB 1024MB
-parted /dev/sda -- mkpart swap linux-swap 1024MB 4096MB
-parted /dev/sda -- mkpart root ext4 4096MB 100%
-parted /dev/sda -- set 1 esp on
+parted /dev/sda - - mklabel gpt
+parted /dev/sda - - mkpart ESP fat32 1 MB 1024 MB
+parted /dev/sda - - mkpart swap linux-swap 1024 MB 4096 MB
+parted /dev/sda - - mkpart root ext4 4096 MB 100%
+parted /dev/sda - - set 1 esp on
 
 sleep 1;
 
@@ -19,10 +19,10 @@ mount -o umask=077 /dev/disk/by-label/boot /mnt/boot # (for UEFI systems only)
 nixos-generate-config --root /mnt
 
 sleep 1;
+
 cp ./configuration.nix /mnt/etc/nixos/configuration.nix
 cp ./fonts.nix /mnt/etc/nixos/fonts.nix
 
 nixos-install
-
 
 echo "please add hardware configuration to git"

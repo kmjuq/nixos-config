@@ -5,9 +5,10 @@ let
 in
 {
   imports =
-    [ 
+    [
       ./hardware-configuration.nix
       ./fonts.nix
+      inputs.nixvim.nixosModules.nixvim
     ];
 
   boot = {
@@ -20,14 +21,14 @@ in
       };
     };
   };
- 
+
   time.timeZone = "Asia/Shanghai";
 
   networking = {
     hostName = user;
-    extraHosts = 
+    extraHosts =
       ''
-	127.0.0.1 localhost
+        	127.0.0.1 localhost
       '';
     firewall = {
       enable = false;
@@ -50,24 +51,20 @@ in
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      intel-compute-runtime
-    ];
   };
   users = {
     users = {
       ${user} = {
         isNormalUser = true;
-        extraGroups = ["wheel"];
-	hashedPassword = "$6$w9ELjs/WT9MLb0cu$y5NV2Ch1hYscVjIV4Zx/bihdU3aJF2uqTHHGvIvYVQBOFyxGF6cvTlHE6mBhTH5hH5MPhSHXI855tE.0JMV0k1";
-	home = "/home/${user}";
+        extraGroups = [ "wheel" ];
+        hashedPassword = "$6$w9ELjs/WT9MLb0cu$y5NV2Ch1hYscVjIV4Zx/bihdU3aJF2uqTHHGvIvYVQBOFyxGF6cvTlHE6mBhTH5hH5MPhSHXI855tE.0JMV0k1";
+        home = "/home/${user}";
       };
     };
   };
 
   environment = {
     systemPackages = with pkgs; [
-      neovim
       wget
       curl
       git
@@ -79,14 +76,29 @@ in
       mesa
       busybox
       toybox
+      jq
+      yq-go
     ];
   };
+
+  programs.nixvim = {
+    enable = true;
+    enableMan = true;
+    viAlias = true;
+    vimAlias = true;
+    extraConfigLua = (
+      builtins.readFile ./software/neovim/lua/options.lua
+      +
+      builtins.readFile ./software/neovim/lua/keymaps.lua
+    );
+  };
+
   virtualisation.vmware.guest.enable = true;
   nix = {
     settings = {
-      substituters = lib.mkForce ["https://mirror.sjtu.edu.cn/nix-channels/store"];
+      substituters = lib.mkForce [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
       auto-optimise-store = true;
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [ "nix-command" "flakes" ];
     };
     gc = {
       automatic = true;
@@ -94,6 +106,6 @@ in
       options = "--delete-older-than 3d";
     };
   };
-  system.stateVersion = "24.05"; 
+  system.stateVersion = "24.05";
 }
 

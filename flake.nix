@@ -29,7 +29,7 @@
     # Official NixOS package source, using nixos's unstable branch by default
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -72,49 +72,68 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # 分区工具
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # 桌面组件创建工具，基于gtk3
+    ags = {
+      url = "github:Aylur/ags";
+    };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: {
-    common = {
-      module = [
-	inputs.disko.nixosModule.disko
-      ];
-    };
-    nixosConfigurations = {
-      "mac-vm-kmj" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        system = "x86_64-linux";
-
-        modules = [
-          ./configuration.nix
-	  
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.kmj = import ./home.nix;
-            };
-          }
+  outputs =
+    { self
+    , nixpkgs
+    , nixvim
+    , ags
+    , home-manager
+    , hyprland
+    , ...
+    }@inputs:
+    {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+      common = {
+        module = [
+          inputs.disko.nixosModule.disko
         ];
       };
-    };
-    homeConfigurations = {
-      "kmj@mac-vm-kmj" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;   
+      nixosConfigurations = {
+        "mac-vm-kmj" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
 
-	modules = [
-          hyprland.homeManagerModules.default
+          modules = [
+            ./configuration.nix
 
-	  ./home.nix
-	];
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.kmj = import ./home.nix;
+              };
+            }
+          ];
+        };
       };
-     
+      homeConfigurations = {
+        "kmj@mac-vm-kmj" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+
+          modules = [
+            hyprland.homeManagerModules.default
+            ./home.nix
+          ];
+        };
+      };
     };
-  };
 }

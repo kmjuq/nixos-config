@@ -1,9 +1,13 @@
 { config, pkgs, ... }:
 
 {
+
+  home.packages = with pkgs; [
+    neovim
+  ];
+
   home.file.".config/nvim" = {
     source = ../neovim;
     recursive = true;
-    executable = true;
   };
 }

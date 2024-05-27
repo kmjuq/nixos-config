@@ -1,0 +1,18 @@
+{
+  "layer": "top",
+  "modules-left": ["cpu","memory"],
+  "modules-right": ["clock"],
+  "clock": {
+      "format": "{: %I:%M %p   %d/%m/%Y}"
+  },
+  "cpu": {
+      "interval": 15,
+      "format": " {}%",
+      "max-length": 10
+  },
+  "memory": {
+      "interval": 30,
+      "format": " {}%",
+      "max-length": 10
+  }
+}
