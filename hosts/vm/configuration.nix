@@ -7,8 +7,6 @@ in
   imports =
     [
       ./hardware-configuration.nix
-      ./fonts.nix
-      inputs.nixvim.nixosModules.nixvim
     ];
 
   boot = {
@@ -28,7 +26,8 @@ in
     hostName = user;
     extraHosts =
       ''
-        	127.0.0.1 localhost
+        127.0.0.1 localhost
+        185.199.108.133 raw.githubusercontent.com
       '';
     firewall = {
       enable = false;
@@ -65,32 +64,10 @@ in
 
   environment = {
     systemPackages = with pkgs; [
-      wget
-      curl
-      git
-      gh
-      parted
-      nix-output-monitor
       open-vm-tools
       mesa-demos
       mesa
-      busybox
-      toybox
-      jq
-      yq-go
     ];
-  };
-
-  programs.nixvim = {
-    enable = true;
-    enableMan = true;
-    viAlias = true;
-    vimAlias = true;
-    extraConfigLua = (
-      builtins.readFile ./software/neovim/lua/options.lua
-      +
-      builtins.readFile ./software/neovim/lua/keymaps.lua
-    );
   };
 
   virtualisation.vmware.guest.enable = true;

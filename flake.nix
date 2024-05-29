@@ -112,7 +112,9 @@
           specialArgs = { inherit inputs; };
 
           modules = [
-            ./configuration.nix
+            ./fonts.nix
+            ./hosts/vm/configuration.nix
+            ./software/root-software.nix
 
             home-manager.nixosModules.home-manager
             {

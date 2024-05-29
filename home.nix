@@ -4,6 +4,7 @@
 
   imports = [
     ./software
+    ./wallpapers
   ];
   # 注意修改这里的用户名与用户目录
   home.username = "kmj";
@@ -97,9 +98,7 @@
     nnn # terminal file manager
 
     # archives
-    zip
     xz
-    unzip
 
     # utils
     ripgrep # recursively searches directories for a regex pattern
@@ -110,12 +109,7 @@
     cowsay
     file
     which
-    tree
     gawk
-
-    # nix related
-    # it provides the command `nom` works just like `nix`
-    # with more details log output
 
     # productivity
     hugo # static site generator
@@ -128,13 +122,12 @@
     # system call monitoring
     strace # system call monitoring
     ltrace # library call monitoring
-    lsof # list open files
 
     # system tools
     sysstat
     elinks
-    dconf
     
+    exercism
   ];
 
   home.stateVersion = "24.05";
