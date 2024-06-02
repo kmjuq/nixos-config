@@ -8,7 +8,7 @@
     # substituers will be appended to the default substituters when fetching packages
     extra-substituters = [
       "https://anyrun.cachix.org"
-      "https://hyprland.cachix.org"
+      "https://hyprland.cachix.org" 
       "https://nix-gaming.cachix.org"
       "https://devenv.cachix.org"
     ];
@@ -100,7 +100,6 @@
     , ...
     }@inputs:
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
       common = {
         module = [
           inputs.disko.nixosModule.disko
@@ -112,6 +111,7 @@
           specialArgs = { inherit inputs; };
 
           modules = [
+            
             ./fonts.nix
             ./hosts/vm/configuration.nix
             ./software/root-software.nix

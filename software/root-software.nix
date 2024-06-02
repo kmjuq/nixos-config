@@ -1,4 +1,11 @@
-{ inputs, config, pkgs, lib, ... }:
+{ 
+  inputs, 
+  config, 
+  pkgs, 
+  lib,
+  system,
+  ... 
+}:
 let
   pass = "";
 in
@@ -18,11 +25,15 @@ in
         +
         builtins.readFile ./neovim/lua/keymaps.lua
       );
+      extraPlugins = with pkgs.vimPlugins; [
+        vim-just
+      ];
     };
   };
 
   environment = {
     systemPackages = with pkgs; [
+      alejandra
       curl
       git
       gh
@@ -32,6 +43,8 @@ in
       jq
       yq-go
       coreutils-full
+      nushell
+      just
     ];
   };
 }

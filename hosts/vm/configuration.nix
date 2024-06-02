@@ -7,6 +7,7 @@ in
   imports =
     [
       ./hardware-configuration.nix
+      ../nix.nix
     ];
 
   boot = {
@@ -71,18 +72,5 @@ in
   };
 
   virtualisation.vmware.guest.enable = true;
-  nix = {
-    settings = {
-      substituters = lib.mkForce [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
-      auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 3d";
-    };
-  };
-  system.stateVersion = "24.05";
 }
 
