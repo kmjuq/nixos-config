@@ -1,7 +1,9 @@
-{ inputs, config, pkgs, ... }:
-
 {
-
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
     extraConfig = builtins.readFile ./hyprland.conf;
@@ -29,4 +31,3 @@
     xdg-desktop-portal-hyprland
   ];
 }
-

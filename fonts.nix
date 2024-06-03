@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   fonts = {
     packages = with pkgs; [
       fira-code-nerdfont
@@ -11,10 +15,10 @@
       antialias = true;
       hinting.enable = true;
       defaultFonts = {
-        emoji = [ "Noto Color Emoji" ];
-        monospace = [ "FiraCode Nerd Font" ];
-        sansSerif = [ "Noto Sans CJK SC" ];
-        serif = [ "Noto Serif CJK SC" ];
+        emoji = ["Noto Color Emoji"];
+        monospace = ["FiraCode Nerd Font"];
+        sansSerif = ["Noto Sans CJK SC"];
+        serif = ["Noto Serif CJK SC"];
       };
     };
   };

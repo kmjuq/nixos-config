@@ -8,15 +8,13 @@
     # substituers will be appended to the default substituters when fetching packages
     extra-substituters = [
       "https://anyrun.cachix.org"
-      "https://hyprland.cachix.org" 
+      "https://hyprland.cachix.org"
       "https://nix-gaming.cachix.org"
-      "https://devenv.cachix.org"
     ];
     extra-trusted-public-keys = [
       "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
     ];
   };
 
@@ -87,55 +85,52 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
-  outputs =
-    { self
-    , nixpkgs
-    , nixvim
-    , ags
-    , home-manager
-    , hyprland
-    , ...
-    }@inputs:
-    {
-      common = {
-        module = [
-          inputs.disko.nixosModule.disko
+  outputs = {
+    self,
+    nixpkgs,
+    nixvim,
+    ags,
+    home-manager,
+    hyprland,
+    ...
+  } @ inputs: {
+    common = {
+      module = [
+        inputs.disko.nixosModule.disko
+      ];
+    };
+    nixosConfigurations = {
+      "mac-vm-kmj" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
+
+        modules = [
+          ./fonts.nix
+          ./hosts/vm/configuration.nix
+          ./software/root-software.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.kmj = import ./home.nix;
+            };
+          }
         ];
       };
-      nixosConfigurations = {
-        "mac-vm-kmj" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
+    };
+    homeConfigurations = {
+      "kmj@mac-vm-kmj" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
-          modules = [
-            
-            ./fonts.nix
-            ./hosts/vm/configuration.nix
-            ./software/root-software.nix
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.kmj = import ./home.nix;
-              };
-            }
-          ];
-        };
-      };
-      homeConfigurations = {
-        "kmj@mac-vm-kmj" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-          modules = [
-            hyprland.homeManagerModules.default
-            ./home.nix
-          ];
-        };
+        modules = [
+          hyprland.homeManagerModules.default
+          ./home.nix
+        ];
       };
     };
+  };
 }

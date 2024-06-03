@@ -1,10 +1,16 @@
-{ pkgs, lib,... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   nix = {
     settings = {
-      substituters = lib.mkForce [ "https://mirrors.cernet.edu.cn/nix-channels/store" ];
+      trusted-users = ["kmj"];
+      substituters = lib.mkForce [
+        "https://mirrors.cernet.edu.cn/nix-channels/store"
+      ];
       auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
     };
     gc = {
       automatic = true;

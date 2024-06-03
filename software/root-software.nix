@@ -1,15 +1,13 @@
-{ 
-  inputs, 
-  config, 
-  pkgs, 
+{
+  inputs,
+  config,
+  pkgs,
   lib,
   system,
-  ... 
-}:
-let
+  ...
+}: let
   pass = "";
-in
-{
+in {
   imports = [
     inputs.nixvim.nixosModules.nixvim
   ];
@@ -22,8 +20,7 @@ in
       vimAlias = true;
       extraConfigLua = (
         builtins.readFile ./neovim/lua/options.lua
-        +
-        builtins.readFile ./neovim/lua/keymaps.lua
+        + builtins.readFile ./neovim/lua/keymaps.lua
       );
       extraPlugins = with pkgs.vimPlugins; [
         vim-just

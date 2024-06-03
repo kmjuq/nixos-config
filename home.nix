@@ -1,7 +1,9 @@
-{ inputs, config, pkgs, ... }:
-
 {
-
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./software
     ./wallpapers
@@ -43,24 +45,27 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      settings = {
-        format = "$all";
-        palette = "catppuccin_mocha";
-      } // builtins.fromTOML (
-        builtins.readFile (
-          pkgs.fetchFromGitHub
+      settings =
+        {
+          format = "$all";
+          palette = "catppuccin_mocha";
+        }
+        // builtins.fromTOML (
+          builtins.readFile (
+            pkgs.fetchFromGitHub
             {
               owner = "catppuccin";
               repo = "starship";
               rev = "5629d23";
               sha256 = "sha256-nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
-            } + /palettes/mocha.toml
-        )
-      );
+            }
+            + /palettes/mocha.toml
+          )
+        );
     };
   };
 
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     xdg-desktop-portal
     wayland
     wayland-protocols
@@ -91,7 +96,6 @@
     # other
     qt6.qtwayland
     # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
-    devenv
     devbox
     gnumake
     gcc
@@ -127,10 +131,9 @@
     # system tools
     sysstat
     elinks
-    
+
     exercism
   ];
 
   home.stateVersion = "24.05";
-
 }

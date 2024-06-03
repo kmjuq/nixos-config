@@ -1,14 +1,16 @@
-{ inputs, config, pkgs, lib, ... }:
-
-let
-  user = "kmj";
-in
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../nix.nix
-    ];
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  user = "kmj";
+in {
+  imports = [
+    ./hardware-configuration.nix
+    ../nix.nix
+  ];
 
   boot = {
     loader = {
@@ -25,11 +27,10 @@ in
 
   networking = {
     hostName = user;
-    extraHosts =
-      ''
-        127.0.0.1 localhost
-        185.199.108.133 raw.githubusercontent.com
-      '';
+    extraHosts = ''
+      127.0.0.1 localhost
+      185.199.108.133 raw.githubusercontent.com
+    '';
     firewall = {
       enable = false;
       allowPing = true;
@@ -56,7 +57,7 @@ in
     users = {
       ${user} = {
         isNormalUser = true;
-        extraGroups = [ "wheel" ];
+        extraGroups = ["wheel"];
         hashedPassword = "$6$w9ELjs/WT9MLb0cu$y5NV2Ch1hYscVjIV4Zx/bihdU3aJF2uqTHHGvIvYVQBOFyxGF6cvTlHE6mBhTH5hH5MPhSHXI855tE.0JMV0k1";
         home = "/home/${user}";
       };
@@ -73,4 +74,3 @@ in
 
   virtualisation.vmware.guest.enable = true;
 }
-
