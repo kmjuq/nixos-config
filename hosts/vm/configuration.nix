@@ -45,6 +45,9 @@ in {
         PermitRootLogin = "yes";
       };
     };
+    automatic-timezoned = {
+      enable = true;
+    };
   };
 
   sound.enable = true;

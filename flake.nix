@@ -7,14 +7,14 @@
   nixConfig = {
     # substituers will be appended to the default substituters when fetching packages
     extra-substituters = [
-      "https://anyrun.cachix.org"
+      #"https://anyrun.cachix.org"
       "https://hyprland.cachix.org"
-      "https://nix-gaming.cachix.org"
+      #"https://nix-gaming.cachix.org"
     ];
     extra-trusted-public-keys = [
-      "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+      #"anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+      #"nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
     ];
   };
 
@@ -47,14 +47,19 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     # community wayland nixpkgs
     # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    
     # anyrun - a wayland launcher
-    anyrun = {
-      url = "github:Kirottu/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #anyrun = {
+    #  url = "github:Kirottu/anyrun";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
     # generate iso/qcow2/docker/... image from nixos configuration
     nixos-generators = {
@@ -62,7 +67,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-gaming.url = "github:fufexan/nix-gaming";
+    #nix-gaming.url = "github:fufexan/nix-gaming";
 
     # add git hooks to format nix code before commit
     pre-commit-hooks = {
@@ -77,9 +82,9 @@
     };
 
     # 桌面组件创建工具，基于gtk3
-    ags = {
-      url = "github:Aylur/ags";
-    };
+    #ags = {
+    #  url = "github:Aylur/ags";
+    #};
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -91,7 +96,6 @@
     self,
     nixpkgs,
     nixvim,
-    ags,
     home-manager,
     hyprland,
     ...
@@ -107,9 +111,8 @@
         specialArgs = {inherit inputs;};
 
         modules = [
-          ./fonts.nix
           ./hosts/vm/configuration.nix
-          ./software/root-software.nix
+          ./software/root
 
           home-manager.nixosModules.home-manager
           {

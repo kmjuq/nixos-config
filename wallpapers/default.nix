@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.file."wallpapers" = {
+  home.file."Wallpapers" = {
     source = ../wallpapers;
     recursive = true;
   };
