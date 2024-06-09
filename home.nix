@@ -66,55 +66,13 @@
   };
 
   home.packages = with pkgs; [
-    xdg-desktop-portal
-    wayland
-    wayland-protocols
-    wayland-utils
-    wlroots
-    dbus
-    wl-clipboard
-    # display manager
-
-    # file manager
-    yazi
-    # input
-    fcitx5-rime
-    # clipboard manager
-    cliphist
-    # app launcher
-    anyrun
-    # terminal
-    zellij
-    kitty
-    # notification
-    mako
-    # wallpaper
-    hyprpaper
-    # multimedia
-    pipewire
-    wireplumber
-    # other
-    qt6.qtwayland
-    # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
-    devbox
-    gnumake
-    gcc
     neofetch
     nnn # terminal file manager
 
-    # archives
-    xz
-
     # utils
-    ripgrep # recursively searches directories for a regex pattern
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
-
-    # misc
-    cowsay
-    file
-    which
-    gawk
+    yazi
 
     # productivity
     hugo # static site generator
@@ -133,6 +91,11 @@
     elinks
 
     exercism
+    onedrive
+    # development
+    devbox
+    devenv
+    direnv
   ];
 
   home.stateVersion = "24.05";

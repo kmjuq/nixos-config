@@ -10,6 +10,7 @@ in {
   imports = [
     ./hardware-configuration.nix
     ../nix.nix
+    ../fonts.nix
   ];
 
   boot = {
@@ -50,6 +51,7 @@ in {
   hardware.pulseaudio.enable = true;
   hardware.opengl = {
     enable = true;
+    package = pkgs.mesa.drivers;
     driSupport = true;
     driSupport32Bit = true;
   };
@@ -67,7 +69,6 @@ in {
   environment = {
     systemPackages = with pkgs; [
       open-vm-tools
-      mesa-demos
       mesa
     ];
   };

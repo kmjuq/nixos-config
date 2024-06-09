@@ -18,18 +18,27 @@ in {
       enableMan = true;
       viAlias = true;
       vimAlias = true;
-      extraConfigLua = (
-        builtins.readFile ./neovim/lua/options.lua
-        + builtins.readFile ./neovim/lua/keymaps.lua
-      );
+      #extraConfigLua = (
+      #  builtins.readFile ./neovim/lua/options.lua
+      #  + builtins.readFile ./neovim/lua/keymaps.lua
+      #);
       extraPlugins = with pkgs.vimPlugins; [
         vim-just
+        LazyVim
       ];
+    };
+    zsh = {
+      enable = true;
+      ohMyZsh = {
+        enable = true;
+      };
     };
   };
 
   environment = {
     systemPackages = with pkgs; [
+      # command line
+      # nix format
       alejandra
       curl
       git
@@ -40,6 +49,8 @@ in {
       jq
       yq-go
       coreutils-full
+
+      # shell
       nushell
       just
     ];
