@@ -119,7 +119,9 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.kmj = import ./home.nix;
+              users = {
+                kmj = import ./home.nix;
+              };
             };
           }
         ];
