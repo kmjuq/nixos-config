@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:{
+{pkgs, ...}: {
   imports = [
     ./neovim
   ];
@@ -15,13 +12,13 @@
     };
   };
 
-
   environment = {
     systemPackages = with pkgs; [
       # command line
       # nix format
       alejandra
       curl
+      lazygit
       git
       gh
       parted
@@ -35,6 +32,25 @@
       nushell
       just
       fzf
+
+      man-pages
+      man-pages-posix
     ];
+  };
+
+  documentation = {
+    enable = true;
+    dev = {
+      enable = true;
+    };
+    man = {
+      enable = true;
+    };
+    info = {
+      enable = true;
+    };
+    nixos = {
+      enable = true;
+    };
   };
 }

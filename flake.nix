@@ -54,7 +54,7 @@
 
     # community wayland nixpkgs
     # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-    
+
     # anyrun - a wayland launcher
     #anyrun = {
     #  url = "github:Kirottu/anyrun";
