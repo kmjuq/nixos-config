@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.nixvim.nixosModules.nixvim
     ./keymappings.nix
@@ -14,5 +18,10 @@
     vimAlias = true;
 
     luaLoader.enable = true;
+
+    extraPlugins = with pkgs.vimPlugins; [
+      vim-nix
+      vim-just
+    ];
   };
 }
