@@ -1,12 +1,12 @@
-parted /dev/sda - - mklabel gpt
+parted /dev/sda -- mklabel gpt
 sleep 1;
-parted /dev/sda - - mkpart ESP fat32 1 MB 1024 MB
+parted /dev/sda -- mkpart ESP fat32 1 MB 1024 MB
 sleep 1;
-parted /dev/sda - - mkpart swap linux-swap 1024 MB 4096 MB
+parted /dev/sda -- mkpart swap linux-swap 1024 MB 4096 MB
 sleep 1;
-parted /dev/sda - - mkpart root ext4 4096 MB 100%
+parted /dev/sda -- mkpart root ext4 4096 MB 100%
 sleep 1;
-parted /dev/sda - - set 1 esp on
+parted /dev/sda -- set 1 esp on
 sleep 1;
 
 mkfs.fat -F 32 -n boot /dev/sda1        # (for UEFI systems only)
