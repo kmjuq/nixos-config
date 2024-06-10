@@ -1,10 +1,10 @@
 parted /dev/sda -- mklabel gpt
 sleep 1;
-parted /dev/sda -- mkpart ESP fat32 1 MB 1024 MB
+parted /dev/sda -- mkpart ESP fat32 1MB 1024MB
 sleep 1;
-parted /dev/sda -- mkpart swap linux-swap 1024 MB 4096 MB
+parted /dev/sda -- mkpart swap linux-swap 1024MB 4096MB
 sleep 1;
-parted /dev/sda -- mkpart root ext4 4096 MB 100%
+parted /dev/sda -- mkpart root ext4 4096MB 100%
 sleep 1;
 parted /dev/sda -- set 1 esp on
 sleep 1;
@@ -27,7 +27,5 @@ sleep 1;
 nixos-generate-config --root /mnt
 
 sleep 1;
-
-nixos-install
 
 echo "please add hardware configuration to git"
