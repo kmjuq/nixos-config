@@ -1,9 +1,11 @@
 {
   programs.nixvim = {
 
-    opts = {
-      updatetime = 100; # Faster completion
+    colorschemes = {
+      catppuccin.enable = true;
+    };
 
+    opts = {
       # Line numbers
       number = true; # Display the absolute line number of the current line
       hidden = true; # Keep closed buffer open in the background
@@ -22,6 +24,7 @@
       #   case characters
       cursorline = true; # Highlight the screen line of the cursor
       cursorcolumn = true; # Highlight the screen column of the cursor
+      signcolumn = "yes";
       laststatus = 3; # When to use a status line for the last window
       fileencoding = "utf-8"; # File-content encoding for the current buffer
       termguicolors = true; # Enables 24-bit RGB color in the |TUI|
@@ -34,9 +37,7 @@
       autoindent = true; # Do clever autoindenting
       list = true;
       listchars = {
-        tab = "» ";
-        trail = "·";
-        nbsp = "␣";
+        space = "·";
       };
     };
   };

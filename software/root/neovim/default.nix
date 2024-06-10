@@ -8,6 +8,7 @@
     ./keymappings.nix
     ./options.nix
     ./plugins
+    ./colorschemes
   ];
 
   programs.nixvim = {
