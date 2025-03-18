@@ -18,6 +18,7 @@
     # terminal
     zellij
     kitty
+    foot
     # notification
     mako
     # wallpaper

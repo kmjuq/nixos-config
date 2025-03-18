@@ -11,6 +11,7 @@ in {
     ./hardware-configuration.nix
     ../nix.nix
     ../fonts.nix
+    ../proxy.nix
   ];
 
   boot = {
@@ -30,7 +31,6 @@ in {
     hostName = user;
     extraHosts = ''
       127.0.0.1 localhost
-      185.199.108.133 raw.githubusercontent.com
     '';
     firewall = {
       enable = false;
@@ -45,19 +45,13 @@ in {
         PermitRootLogin = "yes";
       };
     };
-    automatic-timezoned = {
-      enable = true;
-    };
   };
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.opengl = {
+  hardware.graphics = {
+    package = pkgs.mesa;
     enable = true;
-    package = pkgs.mesa.drivers;
-    driSupport = true;
-    driSupport32Bit = true;
   };
+
   users = {
     users = {
       ${user} = {

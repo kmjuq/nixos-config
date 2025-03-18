@@ -7,7 +7,8 @@
     settings = {
       trusted-users = ["kmj"];
       substituters = lib.mkForce [
-        "https://mirrors.cernet.edu.cn/nix-channels/store"
+        "https://mirror.sjtu.edu.cn/nix-channels/store"
+        "https://cache.nixos.org"
       ];
       auto-optimise-store = true;
       experimental-features = ["nix-command" "flakes"];
@@ -18,5 +19,5 @@
       options = "--delete-older-than 3d";
     };
   };
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }

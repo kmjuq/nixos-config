@@ -29,6 +29,7 @@
 
   home.packages = with pkgs; [
     xdg-desktop-portal-hyprland
+    xdg-desktop-portal
     qt6.qtwayland
   ];
 }

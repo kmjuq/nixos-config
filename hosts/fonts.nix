@@ -6,7 +6,7 @@
 }: {
   fonts = {
     packages = with pkgs; [
-      fira-code-nerdfont
+      nerd-fonts.fira-code
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-emoji
