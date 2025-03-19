@@ -17,8 +17,8 @@
     # anyrun
     # terminal
     zellij
-    kitty
     foot
+    alacritty
     # notification
     mako
     # wallpaper

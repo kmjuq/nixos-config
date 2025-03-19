@@ -10,7 +10,7 @@ defaut:
 
 # build mac vmware
 build-mac-vm-kmj:
-  nixos-rebuild switch --flake .#mac-vm-kmj
+  nixos-rebuild switch --flake .#mac-vm-kmj --show-trace
 
 kmjname := "kmj"
 # 单个变量导出到环境变量

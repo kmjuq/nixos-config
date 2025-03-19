@@ -6,8 +6,16 @@
 }: {
   wayland.windowManager.hyprland = {
     enable = true;
-    extraConfig = builtins.readFile ./hyprland.conf;
     settings = {
+      exec-once = [
+        "hyprpaper"
+      ];
+      general = {
+        "$mainMod" = "SUPER";
+      };
+      bind = [
+        "$mainMod,T,exec,foot"
+      ];
       source = [
         "~/.config/hypr/mocha.conf"
       ];
