@@ -1,0 +1,4 @@
+{
+    // nix ide 插件
+    "nix.formatterPath": "nix3-fmt"
+}

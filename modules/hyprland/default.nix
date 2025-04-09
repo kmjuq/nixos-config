@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
-    ./hyprland
-    ./hyprpaper
+    ../../software/hyprland
+    ../../software/hyprpaper
   ];
 
   home.packages = with pkgs; [

@@ -1,11 +1,7 @@
 {
   description = "NixOS Flake";
 
-  # the nixConfig here only affects the flake itself, not the system configuration!
-  # for more information, see:
-  #     https://nixos-and-flakes.thiscute.world/nixos-with-flakes/add-custom-cache-servers
   nixConfig = {
-    # substituers will be appended to the default substituters when fetching packages
     extra-substituters = [
       "https://hyprland.cachix.org"
     ];
@@ -14,36 +10,22 @@
     ];
   };
 
-  # This is the standard format for flake.nix. `inputs` are the dependencies of the flake,
-  # Each item in `inputs` will be passed as a parameter to the `outputs` function after being pulled and built.
   inputs = {
-    # There are many ways to reference flake inputs. The most widely used is github:owner/name/reference,
-    # which represents the GitHub repository URL + branch/commit-id/tag.
-
-    # Official NixOS package source, using nixos's unstable branch by default
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    # home-manager, used for managing user configuration
+    # home-manager
     home-manager = {
       url = "github:nix-community/home-manager/master";
-
-      # The `follows` keyword in inputs is used for inheritance.
-      # Here, `inputs.nixpkgs` of home-manager is kept consistent with the `inputs.nixpkgs` of the current flake,
-      # to avoid problems caused by different versions of nixpkgs dependencies.
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # 平铺窗口管理器
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
     };
 
     # 分区工具
@@ -52,8 +34,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # neovim 的 nix版本
     nixvim = {
       url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # nix-darwin
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -61,42 +50,54 @@
   outputs = {
     self,
     nixpkgs,
-    nixvim,
+    nix-darwin,
     home-manager,
-    hyprland,
     ...
   } @ inputs: {
     nixosConfigurations = {
-      "mac-vm-kmj" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      # macos 虚拟机
+      "mac-vm" = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
         specialArgs = {inherit inputs;};
 
         modules = [
-          ./hosts/vm/configuration.nix
-          ./software/root
+          ./hosts/mac-vm/configuration.nix
 
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users = {
-                kmj = import ./home.nix;
-              };
+              users.kmj = import ./modules/user/mac-vm.nix;
             };
           }
         ];
       };
     };
-    homeConfigurations = {
-      "kmj@mac-vm-kmj" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+
+    darwinConfigurations = {
+      "mac-mini" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = {inherit inputs;};
 
         modules = [
-          hyprland.homeManagerModules.default
-          ./home.nix
+          # 基础配置，系统配置相关
+          ./hosts/mac-mini/configuration.nix
+          # homebrew 配置
+          ./modules/homebrew
+
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.kemengjian = import ./modules/user/mac-mini.nix;
+            };
+          }
         ];
       };
     };
+
+    formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
   };
 }

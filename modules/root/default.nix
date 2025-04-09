@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./neovim
+    ../../software/neovim/root
   ];
 
   programs = {
@@ -15,22 +15,21 @@
   environment = {
     systemPackages = with pkgs; [
       # command line
-      # nix format
-      alejandra
+
+      # command tools
       curl
-      lazygit
       git
       gh
-      parted
-      nix-output-monitor
-      busybox
       jq
       yq-go
       coreutils-full
+      busybox
 
-      # shell
-      nushell
+      # parition disk
+      parted
+
       just
+      lazygit
       fzf
 
       man-pages

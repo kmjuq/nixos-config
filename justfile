@@ -3,14 +3,17 @@ set shell := ["bash","-c"]
 # 所有变量导出到环境变量env中，调用时需要通过 env. 的方式
 set export
 # 别名配置
-alias bmvk := build-mac-vm-kmj
+alias bmm := build-mac-mini
 # 默认行为
 defaut:
   just --list --unsorted
 
 # build mac vmware
-build-mac-vm-kmj:
-  nixos-rebuild switch --flake .#mac-vm-kmj --show-trace
+build-mac-vm:
+  nixos-rebuild switch --flake .#mac-vm --show-trace
+
+build-mac-mini:
+  nix run nix-darwin/master#darwin-rebuild -- switch --flake .#mac-mini --show-trace
 
 kmjname := "kmj"
 # 单个变量导出到环境变量

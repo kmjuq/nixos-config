@@ -1,19 +1,10 @@
 {
   inputs,
-  config,
   pkgs,
-  lib,
   ...
 }: let
   user = "kmj";
 in {
-  imports = [
-    ./hardware-configuration.nix
-    ../nix.nix
-    ../fonts.nix
-    ../proxy.nix
-  ];
-
   boot = {
     loader = {
       systemd-boot = {
@@ -47,28 +38,15 @@ in {
     };
   };
 
-  hardware.graphics = {
-    package = pkgs.mesa;
-    enable = true;
-  };
-
   users = {
     users = {
       ${user} = {
         isNormalUser = true;
         extraGroups = ["wheel"];
+        # password is 123
         hashedPassword = "$6$w9ELjs/WT9MLb0cu$y5NV2Ch1hYscVjIV4Zx/bihdU3aJF2uqTHHGvIvYVQBOFyxGF6cvTlHE6mBhTH5hH5MPhSHXI855tE.0JMV0k1";
         home = "/home/${user}";
       };
     };
   };
-
-  environment = {
-    systemPackages = with pkgs; [
-      open-vm-tools
-      mesa
-    ];
-  };
-
-  virtualisation.vmware.guest.enable = true;
 }

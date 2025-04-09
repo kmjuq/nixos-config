@@ -3,5 +3,5 @@
   lib,
   ...
 }: {
-  networking.proxy.default="http://192.168.31.199:7890";
+  networking.proxy.default = "http://127.0.0.1:7890";
 }
