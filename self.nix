@@ -4,6 +4,7 @@
   pkgs,
   ...
 }: {
+  device = "";
   networking = {
     proxy = "http://192.168.31.199:7890";
   };

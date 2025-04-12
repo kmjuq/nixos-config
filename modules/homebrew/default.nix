@@ -1,8 +1,8 @@
 {...}: {
   homebrew.enable = true;
-  homebrew.onActivation.autoUpdate = true;
+  homebrew.onActivation.autoUpdate = false;
   homebrew.onActivation.cleanup = "zap"; # 卸载未声明的包（可选）
-  homebrew.onActivation.upgrade = true;
+  homebrew.onActivation.upgrade = false;
 
   # 声明要安装的 Homebrew 软件
   homebrew.brews = [
@@ -20,6 +20,11 @@
     "orbstack"
     "snipaste"
     "kitty"
+
+    # 字体
+    "font-hack-nerd-font"
+    "font-fira-code-nerd-font"
+    "font-jetbrains-mono-nerd-font"
   ];
 
   # 安装 Mac App Store 应用（需 `mas`）

@@ -1,9 +1,8 @@
-{
-  inputs,
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
+  imports = [
+    ../../software/neovim
+  ];
+
   # 注意修改这里的用户名与用户目录
   home.username = "kemengjian";
   home.homeDirectory = "/Users/kemengjian";
@@ -17,7 +16,6 @@
   home.packages = with pkgs; [
     # productivity
     hugo # static site generator
-    just
     lazygit
   ];
 

@@ -1,11 +1,14 @@
 {
   pkgs,
-  inputs,
+  self,
   ...
 }: {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    just
+    git
+    gh
   ];
 
   # Necessary for using flakes on this system.
@@ -15,7 +18,7 @@
   # programs.fish.enable = true;
 
   # Set Git commit hash for darwin-version.
-  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+  system.configurationRevision = self.rev or self.dirtyRev or null;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
