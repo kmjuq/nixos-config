@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  current_neovim_path = "${self.outPath}/software/neovim";
+  current_neovim_path = builtins.toPath ./.;
 in {
   home.packages = with pkgs; [
     neovim
