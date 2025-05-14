@@ -1,26 +1,26 @@
 {
-  lib,
   inputs,
+  system,
   specialArgs,
   systemModules ? [],
   homeModules ? [],
   ...
 }: let
-  inherit (inputs) home-manager nixpkgs;
+  inherit (inputs) home-manager nix-darwin;
 in
-  nixpkgs.lib.nixosSystem {
-    system = "aarch64-linux";
-    inherit specialArgs;
+  nix-darwin.lib.darwinSystem {
+    inherit system specialArgs;
 
     modules =
       systemModules
       ++ [
-        home-manager.nixosModules.home-manager
+        home-manager.darwinModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.kmj.imports = homeModules;
+            extraSpecialArgs = specialArgs;
+            users.kemengjian.imports = homeModules;
           };
         }
       ];

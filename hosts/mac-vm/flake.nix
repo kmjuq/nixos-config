@@ -1,8 +1,8 @@
 {...}: let
-  inputs = import ../../flake/inputs;
+  inputsFlake = import ../../flake/inputs.nix {};
 in {
   inputs = {
-    inherit (inputs) hyprland disko;
+    inherit (inputsFlake) hyprland disko;
   };
 
   outputs = {

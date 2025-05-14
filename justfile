@@ -12,6 +12,9 @@ defaut:
 build-mac-vm:
   nixos-rebuild switch --flake .#mac-vm --show-trace
 
+switch-inputs:
+  nix run .#genflake flake.nix
+
 build-mac-mini:
   nix run nix-darwin/master#darwin-rebuild -- switch --flake .#mac-mini --show-trace
 

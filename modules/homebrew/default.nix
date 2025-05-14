@@ -11,6 +11,13 @@
     "mas" # macOS App Store CLI
     "uv"
     "pnpm"
+
+    "lua"
+    "luarocks"
+
+    "lazygit"
+    "ripgrep"
+    "fd"
   ];
 
   # 安装 GUI 应用（Cask）
@@ -20,11 +27,6 @@
     "orbstack"
     "snipaste"
     "kitty"
-
-    # 字体
-    "font-hack-nerd-font"
-    "font-fira-code-nerd-font"
-    "font-jetbrains-mono-nerd-font"
   ];
 
   # 安装 Mac App Store 应用（需 `mas`）
