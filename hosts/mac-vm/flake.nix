@@ -6,6 +6,7 @@ in {
   };
 
   outputs = {
+    system-build-func = import ../../lib/nixosSystem.nix;
     system-modules = [
       ./configuration.nix
     ];

@@ -1,22 +1,49 @@
 # 设置 justfile 配置
-set shell := ["bash","-c"]
+set shell := ["bash", "-uc"]
 # 所有变量导出到环境变量env中，调用时需要通过 env. 的方式
 set export
 # 别名配置
-alias bmm := build-mac-mini
+alias bmm := b-mac-mini
+alias bmv := b-mac-vm
+
+# nixos 构建命令选择
+nixos-rebuild := \
+if arch() == "aarch64" {
+  if os() == "macos" {
+    "darwin-rebuild"
+  } else {
+    "nixos-rebuild"
+  }
+} else {
+  "nixos-rebuild"
+}
+
 # 默认行为
-defaut:
+default:
   just --list --unsorted
 
-# build mac vmware
-build-mac-vm:
+device:
+  @echo "This is an {{arch()}} {{os()}} {{os_family()}} machine"
+
+
+# nix-config-tools 更新，会有本地缓存
+nct-u:
+  nix flake update --flake github:kmjuq/nix-config-tools
+
+# 执行 nix-config-tools 命令
+nct-fi:
+  nix run github:kmjuq/nix-config-tools#default -- flake-inputs
+  nix fmt
+
+# 第一次执行构建时得用 nix run，后续命令安装后可以用 darwin-rebuild
+# nix run nix-darwin/master#darwin-rebuild -- switch --flake .#mac-mini --show-trace
+# 构建 mac-mini
+b-mac-mini:
+  {{ nixos-rebuild }} switch --flake .#mac-mini --show-trace
+
+# 构建 mac-vm
+b-mac-vm:
   nixos-rebuild switch --flake .#mac-vm --show-trace
-
-switch-inputs:
-  nix run .#genflake flake.nix
-
-build-mac-mini:
-  nix run nix-darwin/master#darwin-rebuild -- switch --flake .#mac-mini --show-trace
 
 kmjname := "kmj"
 # 单个变量导出到环境变量
