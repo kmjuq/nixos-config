@@ -18,6 +18,7 @@
     "lazygit"
     "ripgrep"
     "fd"
+    "love"
   ];
 
   # 安装 GUI 应用（Cask）
@@ -27,6 +28,9 @@
     "orbstack"
     "snipaste"
     "kitty"
+
+    "font-hack-nerd-font"
+    "aerospace"
   ];
 
   # 安装 Mac App Store 应用（需 `mas`）
@@ -37,6 +41,7 @@
 
   # 添加自定义 Homebrew Tap
   homebrew.taps = [
-    "felixkratz/formulae"
+    "FelixKratz/formulae"
+    "nikitabobko/tap"
   ];
 }
