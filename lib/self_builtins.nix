@@ -50,4 +50,10 @@ rec {
 
   # 加载nix文件
   importNixAttr = attr: builtins.mapAttrs (name: value: import value {}) attr;
+
+  # 加载flake.nix文件
+  deviceFlake = attr: dir: filename:
+    builtins.getAttr
+    attr
+    (importNixAttr (getFilePathAttr dir filename));
 }

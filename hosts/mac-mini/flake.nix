@@ -1,17 +1,27 @@
 {...}: let
   inputsFlake = import ../../flake/inputs.nix {};
+  darwinSystem = import ../../lib/darwinSystem.nix;
 in {
   inputs = {
     inherit (inputsFlake) nix-darwin;
   };
 
-  outputs = {
-    system-build-func = import ../../lib/darwinSystem.nix;
-    system-modules = [
+  outputs = let
+    systemModules = [
       ./configuration.nix
+      # homebrew 配置
+      ../../modules/homebrew
     ];
-    home-modules = [
+    homeModules = [
       ./home.nix
     ];
+    system = "aarch64-darwin";
+  in {
+    inherit system;
+    system-configuration = "darwinConfigurations";
+    system-build-func = inputs: username:
+      darwinSystem {
+        inherit inputs username system systemModules homeModules;
+      };
   };
 }

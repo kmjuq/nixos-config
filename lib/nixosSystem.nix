@@ -1,7 +1,7 @@
 {
   inputs,
   system,
-  specialArgs,
+  user,
   systemModules ? [],
   homeModules ? [],
   ...
@@ -9,7 +9,7 @@
   inherit (inputs) home-manager nixpkgs;
 in
   nixpkgs.lib.nixosSystem {
-    inherit system specialArgs;
+    specialArgs = {inherit system inputs;};
 
     modules =
       systemModules
@@ -19,7 +19,7 @@ in
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.kmj.imports = homeModules;
+            users.${user}.imports = homeModules;
           };
         }
       ];

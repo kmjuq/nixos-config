@@ -1,15 +1,9 @@
 {} @ args: {
   inherit args;
 
-  # home-manager
-  home-manager = {
-    url = "github:nix-community/home-manager/master";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   # nix-darwin
   nix-darwin = {
-    url = "github:nix-darwin/nix-darwin";
+    url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 

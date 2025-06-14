@@ -1,12 +1,16 @@
 {
   inputs,
+  username,
   system,
-  specialArgs,
-  systemModules ? [],
-  homeModules ? [],
+  systemModules,
+  homeModules,
   ...
 }: let
   inherit (inputs) home-manager nix-darwin;
+  specialArgs = {
+    inherit inputs;
+    self=inputs.self;
+  };
 in
   nix-darwin.lib.darwinSystem {
     inherit system specialArgs;
@@ -20,7 +24,7 @@ in
             useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = specialArgs;
-            users.kemengjian.imports = homeModules;
+            users."${username}".imports = homeModules;
           };
         }
       ];

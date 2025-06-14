@@ -1,4 +1,6 @@
 {...}: {
+  # 设置主用户（必须与你的用户名一致）
+  system.primaryUser = "kemengjian";
   homebrew.enable = true;
   homebrew.onActivation.autoUpdate = false;
   homebrew.onActivation.cleanup = "zap"; # 卸载未声明的包（可选）
@@ -19,6 +21,7 @@
     "ripgrep"
     "fd"
     "love"
+    "neovim"
   ];
 
   # 安装 GUI 应用（Cask）
@@ -29,8 +32,14 @@
     "snipaste"
     "kitty"
 
+    # 用于显示按键，方便录屏
+    "keycastr"
+
     "font-hack-nerd-font"
-    "aerospace"
+    # 翻译软件
+    "easydict"
+    # app卸载软件
+    "appcleaner"
   ];
 
   # 安装 Mac App Store 应用（需 `mas`）
@@ -43,5 +52,6 @@
   homebrew.taps = [
     "FelixKratz/formulae"
     "nikitabobko/tap"
+    "koekeishiya/formulae"
   ];
 }

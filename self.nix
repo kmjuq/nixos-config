@@ -4,7 +4,7 @@
     proxy = "http://192.168.31.199:7890";
   };
   user = {
-    name = "kmj";
+    name = "kemengjian";
     email = "kemengjian@126.com";
   };
 }
