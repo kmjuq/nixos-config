@@ -14,6 +14,7 @@ in {
     ];
     homeModules = [
       ./home.nix
+      ../../modules/yabai
     ];
     system = "aarch64-darwin";
   in {

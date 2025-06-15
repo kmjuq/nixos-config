@@ -8,38 +8,38 @@
 
   # 声明要安装的 Homebrew 软件
   homebrew.brews = [
-    "wget"
-    "htop"
     "mas" # macOS App Store CLI
-    "uv"
-    "pnpm"
 
     "lua"
     "luarocks"
 
-    "lazygit"
-    "ripgrep"
-    "fd"
-    "love"
-    "neovim"
+    "yabai"
+    "skhd"
+    "sketchybar"
   ];
 
   # 安装 GUI 应用（Cask）
   homebrew.casks = [
     # "google-chrome"
     # "visual-studio-code"
+    # mac 平台 docker k8s平台
     "orbstack"
+    # 截图贴图
     "snipaste"
-    "kitty"
+
 
     # 用于显示按键，方便录屏
     "keycastr"
 
-    "font-hack-nerd-font"
     # 翻译软件
     "easydict"
     # app卸载软件
     "appcleaner"
+    # love 物理引擎
+    "love"
+
+    # 字体
+    "font-hack-nerd-font"
   ];
 
   # 安装 Mac App Store 应用（需 `mas`）

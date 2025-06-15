@@ -1,0 +1,43 @@
+
+yabai -m config \
+    external_bar all:24:0 \
+    menubar_opacity 1.0 \
+    mouse_follows_focus off \
+    focus_follows_mouse off \
+    window_origin_display default \
+    window_placement second_child \
+    window_zoom_persist on \
+    window_shadow on \
+    window_animation_duration 0.0 \
+    window_opacity_duration 0.0 \
+    active_window_opacity 1.0 \
+    normal_window_opacity 0.90 \
+    window_opacity off \
+    insert_feedback_color 0xffd75f5f \
+    split_ratio 0.50 \
+    split_type auto \
+    auto_balance off \
+    top_padding 9 \
+    bottom_padding 9 \
+    left_padding 9 \
+    right_padding 9 \
+    window_gap 9 \
+    layout bsp \
+    mouse_modifier cmd \
+    mouse_action1 move \
+    mouse_action2 resize \
+    mouse_drop_action swap \
+
+# spaces
+yabai -m space 1 --label browser
+yabai -m space 2 --label code
+yabai -m space 3 --label terminal
+
+# aule
+yabai -m rule --add app="^系统设置$" manage=off
+yabai -m rule --add app="^AppCleaner$" manage=off
+
+# signal
+yabai -m signal --add event=window_destroyed action="yabai -m query --windows --space | jq -r '.[0].id' | xargs -I {} yabai -m window --focus {}"
+yabai -m signal --add event=space_changed action="yabai -m query --windows --space $YABAI_SPACE_INDEX | jq -r '.[0].id' | xargs -I {} yabai -m window --focus {}"
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"

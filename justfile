@@ -38,8 +38,8 @@ nct-fi:
 # 第一次执行构建时得用 nix run，后续命令安装后可以用 darwin-rebuild
 # nix run nix-darwin/master#darwin-rebuild -- switch --flake .#mac-mini --show-trace
 # 构建 mac-mini
-b-mac-mini: nct-fi
-  {{ nixos-rebuild }} switch --flake .#mac-mini
+b-mac-mini:
+  sudo {{ nixos-rebuild }} switch --flake .#mac-mini
 
 # 构建 mac-vm
 b-mac-vm:
