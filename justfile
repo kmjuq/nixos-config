@@ -30,10 +30,16 @@ device:
 nct-u:
   nix flake update --flake github:kmjuq/nix-config-tools
 
-# 执行 nix-config-tools 命令
+# 执行 nix-config-tools flake-inputs命令
 nct-fi:
   nix run github:kmjuq/nix-config-tools#default -- flake-inputs
-  nix fmt
+  nix fmt .
+
+# 执行 nix-config-tools flake-home 命令
+nct-fh:
+  nix run github:kmjuq/nix-config-tools#default -- flake-home
+  nix fmt .
+
 
 # 第一次执行构建时得用 nix run，后续命令安装后可以用 darwin-rebuild
 # nix run nix-darwin/master#darwin-rebuild -- switch --flake .#mac-mini --show-trace

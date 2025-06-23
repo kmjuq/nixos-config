@@ -1,6 +1,6 @@
 {
   inputs,
-  username,
+  extraArgs,
   system,
   systemModules,
   homeModules,
@@ -8,8 +8,8 @@
 }: let
   inherit (inputs) home-manager nix-darwin;
   specialArgs = {
-    inherit inputs;
-    self=inputs.self;
+    inherit inputs extraArgs;
+    self = inputs.self;
   };
 in
   nix-darwin.lib.darwinSystem {
@@ -25,7 +25,7 @@ in
             useUserPackages = true;
             extraSpecialArgs = specialArgs;
             backupFileExtension = "home-manager.backup";
-            users."${username}".imports = homeModules;
+            users."${extraArgs.user.name}".imports = homeModules;
           };
         }
       ];

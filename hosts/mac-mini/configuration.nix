@@ -1,6 +1,7 @@
 {
   pkgs,
   self,
+  extraArgs,
   ...
 } @ inputs: {
   # List packages installed in system profile. To search by name, run:
@@ -14,7 +15,7 @@
   # Necessary for using flakes on this system.
   nix = {
     settings = {
-      allowed-users = [ "root" "@wheel" "@admin" ];
+      allowed-users = ["root" "@wheel" "@admin"];
       experimental-features = "nix-command flakes";
     };
   };
@@ -34,8 +35,8 @@
 
   users = {
     users = {
-      kemengjian = {
-        home = "/Users/kemengjian";
+      "${extraArgs.user.name}" = {
+        home = "${extraArgs.user.dir}";
       };
     };
   };

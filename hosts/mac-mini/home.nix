@@ -1,4 +1,4 @@
-{pkgs, ...} @ inputs: {
+{pkgs,extraArgs, ...} @ inputs: {
   imports = [
     ../../software/kitty
     ../../software/neovim
@@ -6,8 +6,8 @@
   ];
 
   # 注意修改这里的用户名与用户目录
-  home.username = "kemengjian";
-  home.homeDirectory = "/Users/kemengjian";
+  home.username = "${extraArgs.user.name}";
+  home.homeDirectory = "${extraArgs.user.dir}";
 
   programs = {
     home-manager = {
@@ -26,5 +26,5 @@
     pnpm
   ];
 
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 }

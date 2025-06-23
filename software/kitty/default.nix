@@ -1,11 +1,11 @@
 {
   config,
   pkgs,
+  extraArgs,
   ...
 }: let
-  current_kitty_path = builtins.toPath ./.;
+  current_kitty_path = "${extraArgs.selfVar.flakeHome}/software/kitty/";
 in {
-
   home.packages = with pkgs; [
     kitty
   ];
@@ -13,5 +13,4 @@ in {
   home.file.".config/kitty" = {
     source = config.lib.file.mkOutOfStoreSymlink "${current_kitty_path}";
   };
-
 }

@@ -3,8 +3,9 @@
   networking = {
     proxy = "http://192.168.31.199:7890";
   };
-  user = {
-    name = "kemengjian";
-    email = "kemengjian@126.com";
+  git = rec {
+    username = "kemengjian";
+    email = "${username}@126.com";
   };
+  flakeHome = "/Users/kemengjian/workspace/git/nixos-config";
 }

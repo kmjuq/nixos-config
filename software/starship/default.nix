@@ -1,11 +1,11 @@
 {
   config,
   pkgs,
+  extraArgs,
   ...
 }: let
-  current_starship_path = builtins.toPath ./starship.toml;
+  current_starship_path = "${extraArgs.selfVar.flakeHome}/software/starship/starship.toml";
 in {
-
   home.packages = with pkgs; [
     starship
   ];
@@ -13,5 +13,4 @@ in {
   home.file.".config/starship.toml" = {
     source = config.lib.file.mkOutOfStoreSymlink "${current_starship_path}";
   };
-
 }

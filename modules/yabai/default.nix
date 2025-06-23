@@ -1,16 +1,12 @@
 {
   config,
+  extraArgs,
   ...
 }: let
-  current_skhdrc_path = builtins.toPath ./skhdrc;
-  current_yabairc_path = builtins.toPath ./yabairc;
-  current_sketchybar_path = builtins.toPath ./sketchybar;
+  current_skhdrc_path = "${extraArgs.selfVar.flakeHome}/modules/yabai/skhdrc";
+  current_yabairc_path = "${extraArgs.selfVar.flakeHome}/modules/yabai/yabairc";
+  current_sketchybar_path = "${extraArgs.selfVar.flakeHome}/modules/yabai/sketchybar";
 in {
-
-  imports = [
-    ../../software/starship
-  ];
-
   home.file.".skhdrc" = {
     source = config.lib.file.mkOutOfStoreSymlink "${current_skhdrc_path}";
   };
@@ -22,5 +18,4 @@ in {
   home.file.".config/sketchybar" = {
     source = config.lib.file.mkOutOfStoreSymlink "${current_sketchybar_path}";
   };
-
 }

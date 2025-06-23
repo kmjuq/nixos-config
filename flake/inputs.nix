@@ -1,4 +1,4 @@
-{} @ args: {
+{...} @ args: {
   inherit args;
 
   # nix-darwin

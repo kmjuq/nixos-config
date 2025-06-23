@@ -17,12 +17,19 @@ in {
       ../../modules/yabai
     ];
     system = "aarch64-darwin";
+    user = rec {
+      name = "kemengjian";
+      dir = "/Users/${name}";
+    };
   in {
+    # outputs 的 formatter 要使用
     inherit system;
     system-configuration = "darwinConfigurations";
-    system-build-func = inputs: username:
-      darwinSystem {
-        inherit inputs username system systemModules homeModules;
+    system-build-func = inputs: extraArgs_: 
+      let
+        extraArgs = extraArgs_ // { inherit user;};
+      in darwinSystem {
+        inherit inputs extraArgs system systemModules homeModules;
       };
   };
 }

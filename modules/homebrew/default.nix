@@ -27,7 +27,6 @@
     # 截图贴图
     "snipaste"
 
-
     # 用于显示按键，方便录屏
     "keycastr"
 
