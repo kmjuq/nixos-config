@@ -26,17 +26,12 @@
     "orbstack"
     # 截图贴图
     "snipaste"
-
     # 用于显示按键，方便录屏
     "keycastr"
-
     # 翻译软件
     "easydict"
     # app卸载软件
     "appcleaner"
-    # love 物理引擎
-    "love"
-
     # 字体
     "font-hack-nerd-font"
   ];

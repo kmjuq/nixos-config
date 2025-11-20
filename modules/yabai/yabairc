@@ -36,6 +36,12 @@ yabai -m space 3 --label terminal
 # aule
 yabai -m rule --add app="^系统设置$" manage=off
 yabai -m rule --add app="^AppCleaner$" manage=off
+yabai -m rule --add app="^IINA$" manage=off
+yabai -m rule --add app="^jin_battle$" manage=off
+yabai -m rule --add app="^Steam Helper$" manage=off
+yabai -m rule --add app="^库乐队$" manage=off
+yabai -m rule --add app="^Watt Toolkit$" manage=off
+yabai -m rule --add app="^系统设置$" manage=off
 
 # signal
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --space | jq -r '.[0].id' | xargs -I {} yabai -m window --focus {}"

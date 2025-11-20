@@ -4,5 +4,9 @@ return {
     indent = {
       scope = { enabled = false },
     },
+    picker = {
+      hidden = true,
+      ignored = true,
+    },
   },
 }
