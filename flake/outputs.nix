@@ -6,7 +6,7 @@
   inherit (inputs.nixpkgs) lib;
   selfLib = import ../lib {inherit lib;};
   selfVar = import ../self.nix;
-  extraArgs = { inherit selfLib selfVar; };
+  extraArgs = {inherit selfLib selfVar;};
 
   device_flake = selfLib._builtins.deviceFlake selfVar.device ../hosts "flake.nix";
   device_output_flake = device_flake.outputs;

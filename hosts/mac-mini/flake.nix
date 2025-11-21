@@ -25,10 +25,10 @@ in {
     # outputs 的 formatter 要使用
     inherit system;
     system-configuration = "darwinConfigurations";
-    system-build-func = inputs: extraArgs_: 
-      let
-        extraArgs = extraArgs_ // { inherit user;};
-      in darwinSystem {
+    system-build-func = inputs: extraArgs_: let
+      extraArgs = extraArgs_ // {inherit user;};
+    in
+      darwinSystem {
         inherit inputs extraArgs system systemModules homeModules;
       };
   };
