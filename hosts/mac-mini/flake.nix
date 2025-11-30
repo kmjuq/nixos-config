@@ -11,6 +11,7 @@ in {
       ./configuration.nix
       # homebrew 配置
       ../../modules/homebrew
+      ../nix.nix
     ];
     homeModules = [
       ./home.nix

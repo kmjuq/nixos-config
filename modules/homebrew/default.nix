@@ -1,6 +1,6 @@
-{...}: {
+{extraArgs, ...}: {
   # 设置主用户（必须与你的用户名一致）
-  system.primaryUser = "kemengjian";
+  system.primaryUser = "${extraArgs.user.name}";
   homebrew.enable = true;
   homebrew.onActivation.autoUpdate = false;
   homebrew.onActivation.cleanup = "zap"; # 卸载未声明的包（可选）
@@ -13,9 +13,13 @@
     "lua"
     "luarocks"
 
+    # 平铺窗口管理器
     "yabai"
     "skhd"
     "sketchybar"
+
+    # 自动加载环境变量的工具
+    "direnv"
   ];
 
   # 安装 GUI 应用（Cask）

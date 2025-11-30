@@ -31,10 +31,4 @@
   ];
 
   home.stateVersion = "25.05";
-
-  home.gc = {
-    automatic = true;
-    frequency = "daily"; # daily / weekly / monthly
-    options = "--delete-older-than 7d"; # 自动删除7天前的 generations
-  };
 }

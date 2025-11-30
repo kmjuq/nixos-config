@@ -16,7 +16,6 @@
   nix = {
     settings = {
       allowed-users = ["root" "@wheel" "@admin"];
-      experimental-features = "nix-command flakes";
     };
   };
 

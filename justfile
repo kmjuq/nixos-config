@@ -22,6 +22,10 @@ if arch() == "aarch64" {
 default:
   just --list --unsorted
 
+check:
+  nix fmt .
+  nix flake check
+
 device:
   @echo "This is an {{arch()}} {{os()}} {{os_family()}} machine"
 
