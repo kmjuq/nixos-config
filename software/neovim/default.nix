@@ -10,6 +10,7 @@ in {
     neovim
     fd
     ripgrep
+    fzf
   ];
 
   home.file.".config/nvim" = {
