@@ -3,9 +3,16 @@
   lib,
   ...
 }: {
+  environment.systemPackages = with pkgs; [
+    just
+    git
+    gh
+  ];
+
   nix = {
     settings = {
       substituters = [
+        "https://mirror.sjtu.edu.cn/nix-channels/store"
         "https://cache.nixos.org"
       ];
       trusted-public-keys = [

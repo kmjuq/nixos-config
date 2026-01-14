@@ -28,6 +28,7 @@
 
     uv
     pnpm
+    go
   ];
 
   home.stateVersion = "25.05";

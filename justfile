@@ -36,12 +36,12 @@ nct-u:
 
 # 执行 nix-config-tools flake-inputs命令
 nct-fi:
-  nix run github:kmjuq/nix-config-tools#default -- flake-inputs
+  nix run --no-update-lock-file github:kmjuq/nix-config-tools#default -- flake-inputs
   nix fmt .
 
 # 执行 nix-config-tools flake-home 命令
 nct-fh:
-  nix run github:kmjuq/nix-config-tools#default -- flake-home
+  nix run --no-update-lock-file github:kmjuq/nix-config-tools#default -- flake-home 
   nix fmt .
 
 

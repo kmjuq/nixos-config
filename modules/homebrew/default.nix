@@ -17,9 +17,9 @@
     "yabai"
     "skhd"
     "sketchybar"
-
-    # 自动加载环境变量的工具
-    "direnv"
+    
+    # 音视频编码
+    "ffmpeg"
   ];
 
   # 安装 GUI 应用（Cask）
@@ -38,6 +38,14 @@
     "appcleaner"
     # 字体
     "font-hack-nerd-font"
+    # 记谱软件
+    "musescore"
+    # 远程桌面
+    "rustdesk"
+    # 局域网文件传输
+    "localsend"
+    # 压缩软件
+    "keka"
   ];
 
   # 安装 Mac App Store 应用（需 `mas`）

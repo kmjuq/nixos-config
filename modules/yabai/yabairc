@@ -43,6 +43,7 @@ yabai -m rule --add app="^库乐队$" manage=off
 yabai -m rule --add app="^Watt Toolkit$" manage=off
 yabai -m rule --add app="^系统设置$" manage=off
 yabai -m rule --add app="^PyCharm$" manage=off
+yabai -m rule --add app="^ffmpeg_egui_hlw$" manage=off
 
 # signal
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --space | jq -r '.[0].id' | xargs -I {} yabai -m window --focus {}"
