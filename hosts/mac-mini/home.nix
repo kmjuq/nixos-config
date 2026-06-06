@@ -1,7 +1,6 @@
-{
-  pkgs,
-  extraArgs,
-  ...
+{ pkgs
+, extraArgs
+, ...
 } @ inputs: {
   imports = [
     ../../software/kitty
@@ -25,10 +24,7 @@
     wget
     tree
     htop
-
-    uv
-    pnpm
-    go
+    ffmpeg
   ];
 
   home.stateVersion = "25.05";

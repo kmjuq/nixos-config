@@ -17,9 +17,15 @@
     "yabai"
     "skhd"
     "sketchybar"
-    
-    # 音视频编码
-    "ffmpeg"
+
+    "go"
+    "pnpm"
+    "uv"
+    "fnm"
+
+    # ManimCE
+    "cairo" 
+    "pkg-config"
   ];
 
   # 安装 GUI 应用（Cask）
@@ -46,6 +52,10 @@
     "localsend"
     # 压缩软件
     "keka"
+    # MacTex
+    "mactex-no-gui"
+
+    "claude-code"
   ];
 
   # 安装 Mac App Store 应用（需 `mas`）
