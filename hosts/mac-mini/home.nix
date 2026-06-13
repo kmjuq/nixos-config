@@ -1,11 +1,13 @@
-{ pkgs
-, extraArgs
-, ...
+{
+  pkgs,
+  extraArgs,
+  ...
 } @ inputs: {
   imports = [
     ../../software/kitty
     ../../software/neovim
     ../../software/starship
+    ../../software/claude-code
   ];
 
   # 注意修改这里的用户名与用户目录

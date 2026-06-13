@@ -3,9 +3,9 @@
   extraArgs,
   ...
 }: let
-  current_claude_path = "${extraArgs.selfVar.flakeHome}/software/claude-code/claude.json";
+  current_claude_path = "${extraArgs.selfVar.flakeHome}/software/claude-code/settings.json";
 in {
-  home.file.".calude.json" = {
+  home.file.".claude/settings.json" = {
     source = config.lib.file.mkOutOfStoreSymlink "${current_claude_path}";
   };
 }

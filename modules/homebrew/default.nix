@@ -24,7 +24,7 @@
     "fnm"
 
     # ManimCE
-    "cairo" 
+    "cairo"
     "pkg-config"
   ];
 
