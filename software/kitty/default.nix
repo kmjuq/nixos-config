@@ -1,10 +1,11 @@
 {
+  self,
   config,
   pkgs,
   extraArgs,
   ...
 }: let
-  current_kitty_path = "${extraArgs.selfVar.flakeHome}/software/kitty/";
+  current_kitty_path = "${self}/software/kitty/";
 in {
   home.packages = with pkgs; [
     kitty

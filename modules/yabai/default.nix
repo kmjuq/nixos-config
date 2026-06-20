@@ -1,11 +1,12 @@
 {
+  self,
   config,
   extraArgs,
   ...
 }: let
-  current_skhdrc_path = "${extraArgs.selfVar.flakeHome}/modules/yabai/skhdrc";
-  current_yabairc_path = "${extraArgs.selfVar.flakeHome}/modules/yabai/yabairc";
-  current_sketchybar_path = "${extraArgs.selfVar.flakeHome}/modules/yabai/sketchybar";
+  current_skhdrc_path = "${self}/modules/yabai/skhdrc";
+  current_yabairc_path = "${self}/modules/yabai/yabairc";
+  current_sketchybar_path = "${self}/modules/yabai/sketchybar";
 in {
   home.file.".skhdrc" = {
     source = config.lib.file.mkOutOfStoreSymlink "${current_skhdrc_path}";
