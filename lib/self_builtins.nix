@@ -56,4 +56,54 @@ rec {
     builtins.getAttr
     attr
     (importNixAttr (getFilePathAttr dir filename));
+
+  # 获取指定目录下的文件名和文件内容并形成attr,文件名不能重复
+  dirFilesToAttr = dir: let
+    # 读取目录内容，得到 { filename = "regular"|"directory"|... }
+    contents = builtins.readDir dir;
+    # 只保留常规文件
+    isRegular = name: type: type == "regular";
+    fileNames = builtins.attrNames contents;
+    regularFiles = builtins.filter (name: isRegular name contents.${name}) fileNames;
+    # 生成 name/value 列表
+    toEntry = name: {
+      inherit name;
+      value = builtins.readFile (dir + "/${name}");
+    };
+  in
+    builtins.listToAttrs (map toEntry regularFiles);
+
+  # 用于根据密钥替换文件内容
+  substituteFromAttr = file: attrs: let
+    content = builtins.readFile file;
+    keys = builtins.attrNames attrs;
+    patterns = map (k: "<${k}>") keys;
+    replacements = map (k: builtins.toString attrs.${k}) keys;
+  in
+    builtins.replaceStrings patterns replacements content;
+
+  # 根据环境变量名列表，获取环境变量名和环境变量内容的attr对象
+  getEnvVars = envNames:
+    builtins.listToAttrs (
+      builtins.map
+      (name: {
+        inherit name;
+        value = builtins.getEnv name;
+      })
+      envNames
+    );
+
+  # 从环境变量获取 JSON 字符串并转换为 attrset
+  getEnvJson = envName: let
+    jsonStr = builtins.getEnv envName;
+  in
+    if jsonStr != ""
+    then builtins.fromJSON jsonStr
+    else {};
+
+  # 安全导入 nix 文件，路径不存在时返回空对象（可自定义默认值）
+  safeImport = path: default:
+    if builtins.pathExists path
+    then import path
+    else default;
 }

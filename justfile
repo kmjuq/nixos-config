@@ -29,33 +29,20 @@ check:
 device:
   @echo "This is an {{arch()}} {{os()}} {{os_family()}} machine"
 
-
 # nix-config-tools 更新，会有本地缓存
 nct-u:
-  nix flake update --flake github:kmjuq/nix-config-tools
+  nix flake update self-key
 
 # 执行 nix-config-tools flake-inputs命令
 nct-fi refresh="":
   nix run {{refresh}} github:kmjuq/nix-config-tools#default -- flake-inputs
   nix fmt .
 
-# 执行 nix-config-tools flake-home 命令
-nct-fh refresh="":
-  nix run {{refresh}} github:kmjuq/nix-config-tools#default -- flake-home
-  nix fmt .
-
-# 执行 nix-config-tools export-env 命令
-# just nct-ee --refresh
-nct-ee refresh="":
-  nix run {{refresh}} github:kmjuq/nix-config-tools#default -- export-env -f KEY/ai_key -f KEY/nix-cc-dpsk-key:file -j
-
 # 第一次执行构建时得用 nix run，后续命令安装后可以用 darwin-rebuild
 # nix run nix-darwin/master#darwin-rebuild -- switch --flake .#mac-mini --show-trace
 # 构建 mac-mini
 b-mac-mini:
-  #!/usr/bin/env bash 
-  eval `nix run github:kmjuq/nix-config-tools#default -- export-env -f KEY/nix-cc-dpsk-key:file -j`
-  sudo {{ nixos-rebuild }} switch --flake .#mac-mini --show-trace
+  sudo {{ nixos-rebuild }} switch --flake .#mac-mini --show-trace --impure
 
 # 构建 mac-vm
 b-mac-vm:

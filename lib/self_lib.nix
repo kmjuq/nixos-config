@@ -1,4 +1,4 @@
-{lib, ...}: {
+{lib, ...}: rec {
   # Generate an attribute set from a list.
   #
   #   lib.genAttrs [ "foo" "bar" ] (name: "x_" + name)

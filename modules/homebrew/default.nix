@@ -3,7 +3,7 @@
   system.primaryUser = "${extraArgs.user.name}";
   homebrew.enable = true;
   homebrew.onActivation.autoUpdate = false;
-  homebrew.onActivation.cleanup = "zap"; # 卸载未声明的包（可选）
+  homebrew.onActivation.cleanup = "none";
   homebrew.onActivation.upgrade = false;
 
   # 声明要安装的 Homebrew 软件

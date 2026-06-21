@@ -10,7 +10,15 @@ in
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
-      inputs = {nixpkgs = {follows = "nixpkgs";};};
       url = "github:nix-community/home-manager/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-base64.url = "github:3nol/nix-base64";
   }
+  // (
+    if self.needKeys or false
+    then {
+      self-key = {url = "git+ssh://git@github.com/kmjuq/KEY.git";};
+    }
+    else {}
+  )
