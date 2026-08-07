@@ -3,7 +3,7 @@
   darwinSystem = import ../../lib/darwinSystem.nix;
 in {
   inputs = {
-    inherit (inputsFlake) nix-darwin;
+    inherit (inputsFlake) nix-darwin llm-agents;
   };
 
   outputs = let
@@ -12,10 +12,15 @@ in {
       # homebrew 配置
       ../../modules/homebrew
       ../nix.nix
+      ../../software/pi-code-agent
     ];
     homeModules = [
       ./home.nix
       ../../modules/yabai
+      ../../software/kitty
+      ../../software/neovim
+      ../../software/starship
+      ../../software/pi-code-agent/config.nix
     ];
     system = "aarch64-darwin";
     user = rec {

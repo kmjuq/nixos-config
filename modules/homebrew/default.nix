@@ -26,6 +26,7 @@
     # ManimCE
     "cairo"
     "pkg-config"
+    "zellij"
   ];
 
   # 安装 GUI 应用（Cask）

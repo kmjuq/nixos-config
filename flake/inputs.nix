@@ -18,4 +18,7 @@
     url = "github:nix-community/disko";
     inputs.nixpkgs.follows = "nixpkgs";
   };
+
+  # 大模型agent汇总
+  llm-agents.url = "github:numtide/llm-agents.nix";
 }

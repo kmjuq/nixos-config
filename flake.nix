@@ -6,6 +6,7 @@
       inputs = {nixpkgs = {follows = "nixpkgs";};};
       url = "github:nix-community/home-manager/release-26.05";
     };
+    llm-agents = {url = "github:numtide/llm-agents.nix";};
     nix-base64 = {url = "github:3nol/nix-base64";};
     nix-darwin = {
       inputs = {nixpkgs = {follows = "nixpkgs";};};
