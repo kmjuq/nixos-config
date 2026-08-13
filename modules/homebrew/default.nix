@@ -26,6 +26,7 @@
     # ManimCE
     "cairo"
     "pkg-config"
+
     "zellij"
   ];
 
