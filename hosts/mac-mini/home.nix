@@ -3,7 +3,6 @@
   extraArgs,
   ...
 } @ inputs: {
-
   # 注意修改这里的用户名与用户目录
   home.username = "${extraArgs.user.name}";
   home.homeDirectory = "${extraArgs.user.dir}";

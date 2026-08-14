@@ -2,10 +2,9 @@
   config,
   pkgs,
   extraArgs,
-  self,
   ...
 }: let
-  current_neovim_path = "${self}/software/neovim/";
+  current_neovim_path = "${extraArgs.selfVar.flakeHome}/software/neovim/";
 in {
   home.packages = with pkgs; [
     neovim

@@ -38,6 +38,11 @@ nct-fi refresh="":
   nix run {{refresh}} github:kmjuq/nix-config-tools#default -- flake-inputs
   nix fmt .
 
+# 执行 nix-config-tools flake-home 命令
+nct-fh refresh="":
+  nix run {{refresh}} github:kmjuq/nix-config-tools#default -- flake-home
+  nix fmt .
+
 # 第一次执行构建时得用 nix run，后续命令安装后可以用 darwin-rebuild
 # nix run nix-darwin/master#darwin-rebuild -- switch --flake .#mac-mini --show-trace
 # 构建 mac-mini

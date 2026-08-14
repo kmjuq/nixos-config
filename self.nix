@@ -7,5 +7,7 @@
     username = "kemengjian";
     email = "${username}@126.com";
   };
+  # 通过命令自动更新的 just nct-fh
+  flakeHome = "/Users/kemengjian/workspace/git/nixos-config";
   needKeys = true;
 }
