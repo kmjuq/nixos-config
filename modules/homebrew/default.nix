@@ -28,6 +28,7 @@
     "pkg-config"
 
     "zellij"
+    "gitui"
   ];
 
   # 安装 GUI 应用（Cask）
@@ -56,8 +57,6 @@
     "keka"
     # MacTex
     "mactex-no-gui"
-
-    "claude-code"
   ];
 
   # 安装 Mac App Store 应用（需 `mas`）

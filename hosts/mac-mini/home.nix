@@ -15,7 +15,6 @@
 
   home.packages = with pkgs; [
     hugo
-    lazygit
     wget
     tree
     htop
